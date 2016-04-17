@@ -1,0 +1,28 @@
+<h1 class="page-header">Dashboard</h1>
+
+<h2> Registered Users </h2>
+<% if admin_signed_in? %>
+<%= link_to "Add a user", new_entry_path, class: "btn btn-primary" %>
+<% end %>
+<br><br>
+
+<% if @entries.present? %>
+<table class="table table-hover table-condensed">
+	<tr>
+		<th>#</th>
+		<th>Name</th>
+		<th>Number</th>
+		<th></th>
+	</tr>
+	<% count = 0 %>
+<% for device in @entries %>
+<tr>
+	<td><%= count+=1 %></td>
+	<td><%= link_to device.name, ''%></td>
+	<td><%= device.number %></td>
+	<td><%= link_to 'Delete',{:action => 'destroy',:id => device.id},:method => :delete,class: "btn btn-danger" %></td>
+</tr>
+<% end %>
+<% else %>
+No entries added yet!
+<% end %>
